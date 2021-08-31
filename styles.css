@@ -36,6 +36,30 @@
 
 /* 
 
+SECCION DE LA DEFINICION 
+
+*/
+
+.definicion {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-size: var(--value-font-size);
+    margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 600px) {
+    .definicion {
+        font-size: var(--medium-font-size);
+    }
+}
+
+.definicion > :last-child {
+    margin-left: 2rem;
+}
+
+/* 
+
 SECCION DEL POLINOMIO 
 
 */
