@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorizar con Ruffini</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+<body>
+    <MAIN class="MAIN">
+        <h1 class="titulo">FACTORIZAR CON REGLA DE RUFFINI</h1>
+        <section class="definicion">
+            <p>Factoriza polinomios de tercer grado igualados a cero</p>
+            <p>La regla de Ruffini se aplicar para factorizar polinomio de grado: n</p>
+            <p>Consiste en una aplicación de la División Sintética, del Polinomio dado entre binomios de la Forma: x - a, donde: "a" es un Factor Entero del Término Independiente.</p>
+            <ol>
+                <li>Se busca un Cociente: C<sub>(x)</sub> de residuo cero, al conseguirlo, la factorización será: (x - a)C<sub>(x)</sub> </li>
+                <li>Este Método también se llama Método de Evaluación, ya que la búsqueda de Residuo cero es reiterativa (A veces no se consigue este Residuo entonces la factorización no será posible).</li>
+                <li>En la División Sintética los Coeficientes del Polinomio de disponen ordenadamente, también se coloca en Término: "a" con el que se probará una posible factorización.</li>
+            </ol>
+        </section>
+
+        <section>
+            <article class="ejercicio">
+                <section class="polinomio">
+                    <div class="valor">
+                        <button class="boton-cambiar-signo">+</button>
+                        <label>
+                            <input class="numero grado-3" type="text">
+                        </label>
+                        <span class="incognita">x<sup class="sup">3</sup></span>
+                    </div>
+
+                    <div class="valor">
+                        <button class="boton-cambiar-signo">+</button>
+                        <label>
+                            <input class="numero grado-2" type="text">
+                        </label>
+                        <span class="incognita">x<sup class="sup">2</sup></span>
+                    </div>
+
+                    <div class="valor">
+                        <button class="boton-cambiar-signo">+</button>
+                        <label>
+                            <input class="numero grado-1" type="text">
+                        </label>
+                        <span class="incognita">x</span>
+                    </div>
+
+                    <div class="valor">
+                        <button class="boton-cambiar-signo">+</button>
+                        <label>
+                            <input class="numero sin-grado" type="text">
+                        </label>
+                    </div>
+                </section>
+
+                <a href="#soluciones">
+                    <button class="resolver-limpiar" id="resolver-limpiar">FACTORIZAR</button>
+                </a>
+
+                <section class="divisibles">
+                    <h2 class="titulo">Numeros divisibles del ultimo numero</h2>
+                    <div class="candidatosConSP" id="contenedorCandidatosConSP"></div>
+                    <div class="candidatosConSN" id="contenedorCandidatosConSN"></div>
+                </section>
+
+                <section class="soluciones" id="soluciones">
+                    <h2 class="titulo">Soluciones</h2>
+                    <div class="contenedor" id="contenedorSoluciones">
+                    </div>
+                </section>
+            </article>
+        </section>
+    </MAIN>
+</body>
+</html>

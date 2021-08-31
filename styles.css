@@ -1,0 +1,156 @@
+:root {    
+    --h1-font-size: 2rem;
+    --h2-font-size: 1.8rem;
+    --big-font-size: 1.6rem;
+    --medium-font-size: 1.29rem;
+    --value-font-size: 1.09rem;
+    --green-color: rgb(0, 255, 0);
+    --button-color: rgb(40, 184, 80);
+    --button-color-alt: rgb(26, 121, 55);
+}
+
+*, ::before, ::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.MAIN {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+@media screen and (min-width: 600px) {
+    .MAIN {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+}
+
+.titulo {
+    text-align: center;
+    font-size: var(--h1-font-size);
+    padding-top: .6em;
+    padding-bottom: .6em;
+}
+
+/* 
+
+SECCION DEL POLINOMIO 
+
+*/
+.ejercicio {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.ejercicio .polinomio {
+    display: grid;
+    padding: .6rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 1.5rem;
+    justify-content: center;
+    background-color: rgb(174, 158, 68);
+}
+
+@media screen and (min-width: 600px) {
+    .ejercicio .polinomio {
+        grid-template-columns: auto auto auto auto;
+        grid-template-rows: 1fr;
+    }
+}
+
+.ejercicio .polinomio .valor {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: end;
+    gap: .2rem;
+}
+
+.ejercicio .polinomio .valor .boton-cambiar-signo {
+    color: rgb(6, 16, 6);
+    border: none;
+    background-color: rgb(40, 184, 80);
+    padding-left: .2em;
+    padding-right: .2em;
+    font-size: var(--medium-font-size);
+}
+
+.ejercicio .polinomio .valor .boton-cambiar-signo:hover {
+    background-color: var(--green-color);
+    cursor: pointer;
+}
+.ejercicio .polinomio .valor .boton-cambiar-signo:active {
+    background-color: var(--button-color-alt);
+}
+
+.ejercicio .polinomio .valor .numero {
+    width: 100%;
+}
+.ejercicio .polinomio .valor .incognita sup,
+.ejercicio .polinomio .valor .incognita,
+.ejercicio .polinomio .valor .numero {
+    font-size: var(--value-font-size);
+}
+
+/* boton para resolver el ejercicio y limpiar la pantalla */
+.ejercicio .resolver-limpiar {
+    font-size: var(--medium-font-size);
+    width: 100%;
+    padding-top: .2em;
+    padding-bottom: .2em;
+}
+
+/* 
+
+SECCION DE LOS NUMEROS DIVISIBLES CON SIGNO POSITIVO Y NEGATIVO 
+
+*/
+
+.ejercicio .divisibles {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: .2rem;
+}
+
+.ejercicio .divisibles .titulo {
+    text-align: center;
+    font-size: var(--h2-font-size);
+}
+
+.ejercicio .divisibles .candidatosConSP,
+.ejercicio .divisibles .candidatosConSN {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6em;
+    justify-content: space-evenly;
+}
+
+.ejercicio .divisibles .candidatosConSP .candidato,
+.ejercicio .divisibles .candidatosConSN .candidato {
+    font-size: var(--medium-font-size);
+}
+
+/* 
+
+SECCION SOLUCIONES 
+
+*/
+.ejercicio .soluciones .titulo {
+    text-align: center;
+    font-size: var(--h2-font-size);
+}
+
+.ejercicio .soluciones .contenedor {
+    display: grid;
+    gap: .2rem;
+    justify-content: center;
+}
+
+.ejercicio .soluciones .contenedor .solucion {
+    font-size: var(--big-font-size);
+    padding: .2em;
+    border: .1em black solid;
+}
