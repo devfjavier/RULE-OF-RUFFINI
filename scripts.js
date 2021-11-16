@@ -1,4 +1,9 @@
-"use strict";
+import botonesCambianSigno from "./JS/botonesCambianSigno.js";
+import eliminarNumerosDivisibles from "./JS/eliminarNumerosDivisibles.js";
+import eliminarSoluciones from "./JS/eliminarSoluciones.js";
+import renderizarNumerosDivisibles from "./JS/renderizarNumerosDivisibles.js";
+import sacarNumerosDivisibles from "./JS/sacarNumerosDivisibles.js";
+
 addEventListener("DOMContentLoaded", cargarJS)
 
 function cargarJS() {
@@ -16,18 +21,10 @@ function cargarJS() {
     let soluciones = []
     let divisiblesConSP = [] // SP significa Signo Positivo
     let divisiblesConSN = [] // SN significa Signo Negativo
-    // cuando se hace click en el boton, cambiar de signo de + o signo de -
-    botonesCambiarSigno.forEach(boton => {
-        boton.addEventListener("click", () => {
-            if (boton.textContent === "+") {
-                boton.textContent = "-"
-            }
-            else if (boton.textContent === "-") {
-                boton.textContent = "+"
-            }
-        })
-    })
     
+    // cuando se hace click en el boton, cambiar de signo de + o signo de -
+    botonesCambianSigno(botonesCambiarSigno)
+
     for (const numero of coeficientes) {
         numero.addEventListener("input", e => validarGrado(e.target))
     }
@@ -45,13 +42,13 @@ function cargarJS() {
         else if (input.classList.contains("sin-grado")) {
             numeroSinGrado = Number(input.value)
         }
-    }
+    }    
     
     resolver_limpiar.addEventListener("click", () => {
         //comprobar si hay numeros divisibles y soluciones existentes antes de renderizarlos
         if (soluciones.length > 0 || divisiblesConSP.length > 0 && divisiblesConSN.length > 0) {
-            eliminarSoluciones()
-            eliminarNumerosDivisibles()
+            eliminarSoluciones(soluciones, lugarSoluciones)
+            eliminarNumerosDivisibles(lugarDivisiblesConSP, lugarDivisiblesConSN, divisiblesConSP, divisiblesConSN)
         }
         aplicarMetodoRuffini()
     })
@@ -62,19 +59,9 @@ function cargarJS() {
     
     */
     function aplicarMetodoRuffini() {
-        sacarNumerosDivisibles()
-    }
-    
-    // al terminar de sacar los numeros divislbes los renderiza
-    // y continua con sacar la soluciones
-    function sacarNumerosDivisibles() {
-        for (let candidato = numeroSinGrado; candidato > 0; candidato--) {
-            if (numeroSinGrado % candidato === 0) {
-                divisiblesConSP.push(candidato)
-                divisiblesConSN.push(candidato * -1)
-            }
-        }
-        renderizarCantidatos()
+        sacarNumerosDivisibles(numeroSinGrado, divisiblesConSP, divisiblesConSN)
+        // agregar al HTML los numeros divisibles
+        renderizarNumerosDivisibles(divisiblesConSP, divisiblesConSN, lugarDivisiblesConSP, lugarDivisiblesConSN)
         sacarSoluciones(divisiblesConSP, divisiblesConSN)
     }
     
@@ -126,23 +113,6 @@ function cargarJS() {
         renderizarSoluciones()
     }
 
-    // agregar al HTML los posibles candidatos a solucion
-    function renderizarCantidatos() {
-        let index = 0
-        while (index < divisiblesConSP.length) {
-            const candidatoSP = document.createElement("span")
-            const candidatoSN = document.createElement("span")
-            candidatoSP.classList.add("candidato")
-            candidatoSN.classList.add("candidato")
-
-            candidatoSP.textContent = divisiblesConSP[index]
-            lugarDivisiblesConSP.appendChild(candidatoSP)
-            
-            candidatoSN.textContent = divisiblesConSN[index]
-            lugarDivisiblesConSN.appendChild(candidatoSN)
-            index++
-        }
-    }
 
     // agregar al HTML las soluciones 
     function renderizarSoluciones() {
@@ -152,33 +122,5 @@ function cargarJS() {
             solucion.textContent = soluciones[index]
             lugarSoluciones.appendChild(solucion)
         }
-    }
-
-    // eliminar soluciones
-    function eliminarSoluciones() {
-        let elementoSolucion = Array.from(document.querySelectorAll(".ejercicio .soluciones .contenedor .solucion"))
-        let solucionesRestantes = soluciones.length
-        while (solucionesRestantes > 0) {
-            lugarSoluciones.removeChild(elementoSolucion[solucionesRestantes - 1])
-            soluciones.pop()           
-            solucionesRestantes--
-        }
-    } 
-
-    // eliminar divisibles
-    function eliminarNumerosDivisibles() {
-        let elementoDivisibleSP = Array.from(document.querySelectorAll(".ejercicio .divisibles .candidatosConSP .candidato"))
-        let elementoDivisibleSN = Array.from(document.querySelectorAll(".ejercicio .divisibles .candidatosConSN .candidato"))
-        // se usa solo candidatosConSP.length para los candidatos con signo positivo y negativo 
-        // ya que la cantitad de datos siempre es igual en ambos
-        let divisiblesRestantes = divisiblesConSP.length
-        while (divisiblesRestantes > 0) {
-            lugarDivisiblesConSP.removeChild(elementoDivisibleSP[divisiblesRestantes - 1])
-            lugarDivisiblesConSN.removeChild(elementoDivisibleSN[divisiblesRestantes - 1])
-            divisiblesConSP.pop()
-            divisiblesConSN.pop()          
-            divisiblesRestantes--
-        }
-    } 
-        
+    }       
 }
