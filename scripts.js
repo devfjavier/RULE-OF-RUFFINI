@@ -2,10 +2,10 @@
 addEventListener("DOMContentLoaded", cargarJS)
 
 function cargarJS() {
-    const botonesCambiarSigno = Array.from(document.querySelectorAll(".ejercicio .polinomio .valor .boton-cambiar-signo"))
-    const coeficientes = Array.from(document.querySelectorAll(".ejercicio .polinomio .valor .numero"))
+    const botonesCambiarSigno = Array.from(document.querySelectorAll(".ejercicio .boton-cambiar-signo"))
+    const coeficientes = Array.from(document.querySelectorAll(".ejercicio .numero"))
     const resolver_limpiar = document.getElementById("resolver-limpiar")
-    const signos = Array.from(document.querySelectorAll(".ejercicio .polinomio .valor .boton-cambiar-signo"))
+    const signos = Array.from(document.querySelectorAll(".ejercicio .boton-cambiar-signo"))
     const lugarSoluciones = document.getElementById("contenedorSoluciones")
     const lugarDivisiblesConSP = document.getElementById("contenedorCandidatosConSP")
     const lugarDivisiblesConSN = document.getElementById("contenedorCandidatosConSN")
