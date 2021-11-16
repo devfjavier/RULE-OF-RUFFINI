@@ -13,10 +13,6 @@ function cargarJS() {
         numeroGrado2,
         numeroGrado1,
         numeroSinGrado
-    let esValidoGrado3,
-        esValidoGrado2,
-        esValidoGrado1,
-        esValidoSinGrado
     let soluciones = []
     let divisiblesConSP = [] // SP significa Signo Positivo
     let divisiblesConSN = [] // SN significa Signo Negativo
@@ -32,44 +28,24 @@ function cargarJS() {
         })
     })
     
-    // cuando se hace click en otro lado despues de escribir el numero, 
-    // recupera el dato, lo convierte a numero y lo guarda en la variable
-    coeficientes.forEach(numero => {
-        numero.addEventListener("change", () => {
-            if (numero.classList.contains("grado-3")) {
-                numeroGrado3 = Number(numero.value)
-                if (typeof numeroGrado3 === "number" && !isNaN(numeroGrado3)) {
-                    esValidoGrado3 = true
-                }else {
-                    esValidoGrado3 = false
-                }
-            }
-            else if (numero.classList.contains("grado-2")) {
-                numeroGrado2 = Number(numero.value)
-                if (typeof numeroGrado2 === "number" && !isNaN(numeroGrado2)) {
-                    esValidoGrado2 = true
-                }else {
-                    esValidoGrado2 = false
-                }
-            }
-            else if (numero.classList.contains("grado-1")) {
-                numeroGrado1 = Number(numero.value)
-                if (typeof numeroGrado1 === "number" && !isNaN(numeroGrado1)) {
-                    esValidoGrado1 = true
-                }else {
-                    esValidoGrado1 = false
-                }
-            }
-            else if (numero.classList.contains("sin-grado")) {
-                numeroSinGrado = Number(numero.value)
-                if (typeof numeroSinGrado === "number" && !isNaN(numeroSinGrado) && numeroSinGrado !== 0) {
-                    esValidoSinGrado = true
-                }else {
-                    esValidoSinGrado = false
-                }
-            }
-        })
-    })
+    for (const numero of coeficientes) {
+        numero.addEventListener("input", e => validarGrado(e.target))
+    }
+    
+    function validarGrado(input) {
+        if (input.classList.contains("grado-3")) {
+            numeroGrado3 = Number(input.value)
+        }
+        else if (input.classList.contains("grado-2")) {
+            numeroGrado2 = Number(input.value)
+        }
+        else if (input.classList.contains("grado-1")) {
+            numeroGrado1 = Number(input.value)
+        }
+        else if (input.classList.contains("sin-grado")) {
+            numeroSinGrado = Number(input.value)
+        }
+    }
     
     resolver_limpiar.addEventListener("click", () => {
         //comprobar si hay numeros divisibles y soluciones existentes antes de renderizarlos
@@ -86,16 +62,7 @@ function cargarJS() {
     
     */
     function aplicarMetodoRuffini() {
-        validarCoeficientes()
-    }
-
-    function validarCoeficientes() {
-        if (esValidoGrado3 && esValidoGrado2 && esValidoGrado1 && esValidoSinGrado) {
-            sacarNumerosDivisibles()
-        }
-        else {
-            alert("coeficientes no validos")
-        }
+        sacarNumerosDivisibles()
     }
     
     // al terminar de sacar los numeros divislbes los renderiza
